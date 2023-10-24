@@ -6,7 +6,7 @@ Sample code for _``Inductive detection of Influence Operations via Graph Learnin
 
 #### train.py:   
 Train and evaluate models with the following steps:
-1. Initialize model (LR, RF, MLP, GCN, GCN_MPs, GCN_MP)'
+1. Initialize model: LR, RF, MLP, GCN, GCN_MPs, or GCN_MP
 2. Load PE specified by binary string (one-hot, node2vec, lap-eig, random-walk, net-feat)
 3. Load dataset specified by train and test binary string
 4. Train and log progress, including best performance
