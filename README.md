@@ -10,7 +10,7 @@ Train and evaluate models with the following steps:
 2. Load PE specified by binary string (one-hot, node2vec, lap-eig, random-walk, net-feat)
 3. Load dataset specified by train and test binary string
 4. Train and log progress, including best performance
-5. Compute empirical baseline for Integrated Gradients 
+5. Compute empirical baseline for Integrated Gradients (IG) 
 6. Compute and log IG values for individual features and feature types
 
 **models:**
