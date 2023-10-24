@@ -31,4 +31,4 @@ Train and evaluate models with the following steps:
 
 #### batch.sh: 
 
-iterates over command line arguments written by gen_args.py.
+Iterates train.py script over command line arguments written to file by gen_args.py.
