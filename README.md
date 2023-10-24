@@ -15,7 +15,7 @@ Train and evaluate models with the following steps:
 
 **models:**
 
-* models.py: Includes classes for LR, RF, MLP, GCN, GCN_MPs, GCN_MP, as well as training utilities.
+* models.py: Modules for LR, RF, MLP, GCN, GCN_MPs, GCN_MP, as well as training utilities.
   
 **utils:**
 
@@ -28,3 +28,7 @@ Train and evaluate models with the following steps:
 * node2vec.py: script for computing node2vec embeddings using graph data.
 * positional_encoding.py: script for computing random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) using graph data.
 * network_features.py: script for computing network features (degree, clustering coefficient, betweenness, PageRank, HITS).
+
+#### batch.sh: 
+
+iterates over command line arguments written by gen_args.py.
