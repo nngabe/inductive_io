@@ -2,7 +2,7 @@
 
 Sample code for ``Inductive detection of Influence Operations via Graph Learning" [paper]: https://arxiv.org/abs/2305.16544
 
-Contents:
+## Contents:
 
 train.py: 
   Train and evaluate models with the following steps:
