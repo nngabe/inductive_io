@@ -23,6 +23,7 @@ from imblearn.under_sampling import RandomUnderSampler
 from ast import literal_eval as lit_eval
 
 
+# shortened urls not in publicly available lists
 alias = {'dailym.ai': 'dailymail.co.uk',
  'amzn.to': 'amazon.com',
  'apne.ws': 'apnews.com',
@@ -87,23 +88,9 @@ alias = {'dailym.ai': 'dailymail.co.uk',
  'ebay.to': 'ebay.com'
 }
 
-def get_alias():
-    return alias
-
-def to_inductive(data):
-    data = data.clone()
-    mask = data.train_mask
-    data.x = data.x[mask]
-    data.y = data.y[mask]
-    data.train_mask = data.train_mask[mask]
-    data.test_mask = None
-    data.edge_index, data.edge_attr = subgraph(mask, data.edge_index, data.edge_attr,
-                                  relabel_nodes=True, num_nodes=data.num_nodes)
-    data.num_nodes = mask.sum().item()
-    return data
-
-def domain_mask(df,args):
-    
+def censor_domains(df,args):
+    """ Censor domains by frequencies in the training dataset.
+    """
     if args.metric=='ratio':
         xdf = pd.read_csv('../comp_nodes/xdf_rci.csv',index_col=0)
         mask = np.where(xdf.isna().sum(1)>0)
@@ -153,8 +140,13 @@ def domain_mask(df,args):
     return df,(index,strip)
     
 
-def get_mask_data(args,early=False):
-    
+def load_data(args,early=False):
+    """ Get full data set and mask depending on training/testing campaign(s):
+        1. read csv files with edge-wise and node-wise features
+        2. select positional encoding spcified by arguments
+        3. normalize data as specified by arguments
+        4. 
+    """ 
     MODEL = args.model
     PE = args.pe # one-hot, node2vec, lap-eig, random-walk, net-feat
     NUM_DOMS = args.doms
@@ -172,7 +164,7 @@ def get_mask_data(args,early=False):
     edges = pd.read_csv('../edge_data/C_15_rci.csv',index_col=0).to_numpy(dtype=np.int32)
     ew = pd.read_csv('../edge_data/edge_counts_rci.csv',index_col=0)
 
-    dm,index = domain_mask(df,args)
+    dm, index = censor_domains(df,args)
     if early==2: return dm,index
     
     X = dm.iloc[:,4:].to_numpy(dtype=np.float32)
@@ -187,7 +179,7 @@ def get_mask_data(args,early=False):
     X = torch.tensor(X)
     X = norm(X)
     
-    lims = [X.shape[1]]
+    lims = [X.shape[1]] # start and stop indices of each positional encoding.
     if PE[0]=='1':
         print('ones: ',X.shape[1],'>>> ',end='')
         X = torch.cat((X,torch.eye(X.shape[0])),axis=1)
@@ -234,15 +226,17 @@ def get_mask_data(args,early=False):
 
     self_loops = [[i,i] for i in range(X.shape[0])]
     e = np.concatenate((e,e[:,[1,0]]),axis=0)
-    if args.model in ['GCN1','GCN2']: e = np.concatenate((e,self_loops),axis=0)
+    if args.model in ['GCN1','GCN2']: 
+        e = np.concatenate((e,self_loops),axis=0)
     w = np.concatenate((w,w),axis=0)
 
     data = Data(x=torch.tensor(X,dtype=torch.float), edge_index=torch.tensor(e,dtype=torch.long).T, y=torch.tensor(y,dtype=torch.float), edge_attr=w)
     data.edge_attr = torch.tensor(w,dtype=torch.float,requires_grad=True)
-    if args.model in ['GCN1','GCN2']: data.edge_attr = torch.cat((data.edge_attr,-1*torch.ones((X.shape[0],w.shape[1]))),axis=0)
+    if args.model in ['GCN1','GCN2']: 
+        data.edge_attr = torch.cat((data.edge_attr,-1*torch.ones((X.shape[0],w.shape[1]))),axis=0)
     data.num_classes = 1
-    e = data.edge_index<0#data.x.shape[0]
-    data.edge_index[e] = data.edge_index[e]%data.x.shape[0]
+    e = data.edge_index<0
+    data.edge_index[e] = data.edge_index[e] % data.x.shape[0]
         
     return data, xdf, index, lims
 
@@ -264,53 +258,6 @@ def evaluate(x):
         res = x[1:-1].split(',')
     
     return res
-
-
-def get_data(WEIGHT=True):
-    xdf = pd.read_csv('../comp_nodes/xdf_rci.csv',index_col=0)
-    mask = np.where(xdf.isna().sum(1)>0)
-    xdf.lab_io.iloc[mask] = '0'
-    xdf.lab_state.iloc[mask] = 'comp'
-    xdf.lab_set.iloc[mask] = 'train'
-
-    df = xdf.reset_index(drop=True)
-    edges = pd.read_csv('../edge_data/C_15_rci.csv',index_col=0).to_numpy(dtype=np.int32)
-    ew = pd.read_csv('../edge_data/edge_counts_rci.csv',index_col=0)
-
-    n1 = df[df.lab_io==1].iloc[:,4:].sum()
-    n0 = df[df.lab_io==0].iloc[:,4:].sum()
-    ratio = n1/n0
-    p=.4
-    max_ratio = p/(1.-p)
-    print(f'max_ratio = {max_ratio:.2f}')
-    strip = np.logical_or(ratio>max_ratio,ratio.isna()) # strip domains with ratios which are obvious give aways and nan.
-    df = df.drop(columns=strip[strip].index.to_list())
-    df = df.reset_index(drop=True)
-    X = df.iloc[:,4:].to_numpy(dtype=np.int32)
-    X = np.concatenate((X[:,:1000],np.eye(X.shape[0])),axis=1)
-    y = df.lab_io.to_numpy(dtype=np.int32)
-
-    if not WEIGHT:
-        cut = edges[:,2]>0
-        w = edges[cut][:,2]
-        e = edges[cut][:,[0,1]]
-    elif WEIGHT:
-        e = np.array(ew.index.to_series().apply(literal_eval).to_list(),dtype=np.int32)
-        w = ew.to_numpy(dtype=np.float32)
-
-    self_loops = [[i,i] for i in range(X.shape[0])]
-    #self_w = X.sum(1)
-    e = np.concatenate((e,e[:,[1,0]],self_loops),axis=0)
-    w = np.concatenate((w,w),axis=0)
-    #w = np.log(1+w)/np.log(1+w.max())
-
-    data = Data(x=torch.tensor(X,dtype=torch.float), edge_index=torch.tensor(e,dtype=torch.long).T, y=torch.tensor(y,dtype=torch.float))
-    data.w = torch.tensor(w,dtype=torch.float,requires_grad=True)
-    data.num_classes = 1
-    e = data.edge_index<0#data.x.shape[0]
-    data.edge_index[e] = data.edge_index[e]%data.x.shape[0]
-    return data
-
 
 col = ['screen_name', 'id', 'created_at', 'is_retweet', 'retweeted', 'mentions', 'url_exp', 'url', 'tweet_text','RT']
 
@@ -352,8 +299,6 @@ def dom(x):
     return ext.registered_domain
 
 def expand(df, lst_cols, fill_value='', preserve_index=False):
-    """Stolen from stackoverflow."""
-    import numpy as np
     # make sure `lst_cols` is list-alike
     if (lst_cols is not None
         and len(lst_cols) > 0
@@ -417,4 +362,3 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
-

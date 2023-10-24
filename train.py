@@ -14,12 +14,10 @@ import pickle
 import copy
 
 import torch
-from torch_geometric.nn.aggr import LSTMAggregation, SoftmaxAggregation
-from torch_geometric.data import Data,GraphSAINTRandomWalkSampler, NeighborSampler
 from captum.attr import IntegratedGradients
 
-from models_io.models_io import *
-from cutils import get_mask_data, write_results, to_inductive
+from cutils import load_data, write_results, to_inductive
+from models.models import *
 
 if __name__ == '__main__':
     """ Train and evaluate models with the following steps:
@@ -103,6 +101,7 @@ if __name__ == '__main__':
         AUCt = (res[:,2].mean(), res[:,2].std())
         write_results(F1v, F1t, AUCt, model, args)
         sys.exit(0)
+
     elif MODEL=='RF':
         print(f'model: {MODEL}')
         res = np.zeros((args.epochs,3)) # F1_val, F1_test, AUC_test
@@ -114,12 +113,16 @@ if __name__ == '__main__':
         AUCt = (res[:,2].mean(), res[:,2].std())
         write_results(F1v, F1t, AUCt, model, args)
         sys.exit(0)
+
     elif MODEL=='MLP':
         model = MLP(in_channels, hidden_channels, out_channels, args.num, dropout)
+    
     elif MODEL=='GCN':
         model = GCN(data.num_features, hidden_channels, data.num_classes, args.num, dropout, weighted=False)
+    
     elif MODEL=='GCN_MPs':
         model = GCN_lw(data.num_features, hidden_channels, data.num_classes, args.num, dropout, weighted=True)
+    
     elif MODEL=='GCN_MP':
         model = GCN(data.num_features, hidden_channels, data.num_classes, args.num, dropout, weighted=True)
 
