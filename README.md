@@ -1,6 +1,6 @@
 # inductive_io
 
-Sample code for _``Inductive detection of Influence Operations via Graph Learning"_ [[paper](https://arxiv.org/abs/2305.16544)]
+Sample code for _``Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
 
 ## Contents:
 
