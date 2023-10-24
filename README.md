@@ -15,16 +15,16 @@ Train and evaluate models with the following steps:
 
 **models:**
 
-*models.py: Includes classes for LR, RF, MLP, GCN, GCN_MPs, GCN_MP, as well as training utilities.
+* models.py: Includes classes for LR, RF, MLP, GCN, GCN_MPs, GCN_MP, as well as training utilities.
   
 **utils:**
 
-*utils.py: utility functions for loading, saving, and plotting data.
-*twitter_api.py: wrapper functions for making requests from the Twitter API by username or uid.
+* utils.py: utility functions for loading, saving, and plotting data.
+* twitter_api.py: wrapper functions for making requests from the Twitter API by username or uid.
 
 **graph_compute:**
 
-*compute_courls.py: iterate over sorted list of sorted integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
-*node2vec.py: script for computing node2vec embeddings using graph data.
-*positional_encoding.py: script for computing random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) using graph data.
-*network_features.py: script for computing network features (degree, clustering coefficient, betweenness, PageRank, HITS).
+* compute_courls.py: iterate over sorted list of sorted integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
+* node2vec.py: script for computing node2vec embeddings using graph data.
+* positional_encoding.py: script for computing random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) using graph data.
+* network_features.py: script for computing network features (degree, clustering coefficient, betweenness, PageRank, HITS).
