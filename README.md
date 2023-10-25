@@ -2,7 +2,7 @@
 
 Sample code for _``Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
 
-See figure below for visual for an overview of the framework used in the paper.
+See figure below for an overview of the framework used in the paper.
 
 ## Contents:
 
