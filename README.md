@@ -24,7 +24,7 @@ Train and evaluate models with the following steps:
 
 **/graph_compute**
 
-* compute_courls.py: iterate over sorted list of sorted integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
+* compute_courls.py: iterate over sorted list of integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
 * node2vec.py: script for computing node2vec embeddings using graph data.
 * positional_encoding.py: script for computing random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) using graph data.
 * network_features.py: script for computing network features (degree, clustering coefficient, betweenness, PageRank, HITS).
@@ -32,7 +32,7 @@ Train and evaluate models with the following steps:
 **batch.sh**
 Iterates train.py script over command line arguments written to file by gen_args.py.
 
-
+================
 <img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
 
 
