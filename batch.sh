@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### iterates training script over command line arguments given in file.txt (file given as first argument).
+### iterates training script over command line arguments specified by gen_args.py (see gen_args.py for explanation).
 
 file=$1
 if [[ $# -eq 0 ]] ; then
