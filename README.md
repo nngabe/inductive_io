@@ -10,7 +10,7 @@ An overview of the framework can be found in the [figure](##figure) below.
 Train and evaluate models with the following steps:
 1. Initialize model: LR, RF, MLP, GCN, GCN_MPs, or GCN_MP
 2. Load up to five positional encodings specified by binary string 
-3. Load dataset specified by train and test binary string
+3. Load train/val/test datasets specified by train/val/test binary strings
 4. Train and log progress, including best performance
 5. Compute empirical baseline for Integrated Gradients (IG)
 6. Compute and log IG values for individual features and feature types
