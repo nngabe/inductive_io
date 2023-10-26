@@ -2,7 +2,7 @@
 
 Sample code for _``Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
 
-An overview of the [framework](# inductive-graph-learning-framework-for-the-detection-of-io:) can be found in the figure below,
+An overview of the [framework](##figure) can be found in the figure below,
 
 ## Contents:
 
@@ -34,7 +34,7 @@ Train and evaluate models with the following steps:
 **batch.sh**
 Iterates train.py script over command line arguments written to file by gen_args.py.
 
-# Inductive graph learning framework for the detection of IO:
+## Figure
 <img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
 
 
