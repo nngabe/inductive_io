@@ -7,6 +7,7 @@ An overview of the framework can be found in the [figure](##figure) below.
 ## Contents:
 
 **train.py**  
+
 Train and evaluate models with the following steps:
 1. Initialize model: LR, RF, MLP, GCN, GCN_MPs, or GCN_MP
 2. Load up to five positional encodings specified by binary string 
