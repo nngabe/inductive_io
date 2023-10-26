@@ -2,7 +2,7 @@
 
 Sample code for _``Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
 
-An overview of the [framework](# Inductive graph learning framework for the detection of IO:) can be found in the figure below,
+An overview of the [framework](# inductive-graph-learning-framework-for-the-detection-of-IO:) can be found in the figure below,
 
 ## Contents:
 
