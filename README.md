@@ -9,7 +9,7 @@ An overview of the [framework](##figure) can be found in the figure below, and a
 **train.py**  
 Train and evaluate models with the following steps:
 1. Initialize model: LR, RF, MLP, GCN, GCN_MPs, or GCN_MP
-2. Load up to five positional encodings specified by binary string (one-hot, node2vec, lap-eig, random-walk, and/or net-feat)
+2. Load up to five positional encodings specified by binary string 
 3. Load dataset specified by train and test binary string
 4. Train and log progress, including best performance
 5. Compute empirical baseline for Integrated Gradients (IG)
