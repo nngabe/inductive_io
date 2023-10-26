@@ -32,9 +32,6 @@ Train and evaluate models with the following steps:
 * positional_encoding.py: Computes random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) and writes to file.
 * network_features.py: Computes network features (degree, clustering coefficient, betweenness, PageRank, HITS) and writes to file.
 
-**batch.sh**
-Iterates train.py script over command line arguments written to file by gen_args.py.
-
 ## Figure
 <img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
 
