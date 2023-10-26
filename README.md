@@ -21,15 +21,15 @@ Train and evaluate models with the following steps:
   
 **/utils**
 
-* utils.py: utility functions for loading, saving, and plotting data.
-* twitter_api.py: wrapper functions for making requests from the Twitter API by username or uid.
+* utils.py: utility Functions for loading, saving, and plotting data.
+* twitter_api.py: Wrapper functions for making requests from the Twitter API by username or uid.
 
 **/graph_compute**
 
-* compute_courls.py: iterate over sorted list of integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
-* node2vec.py: script for computing node2vec embeddings using graph data.
-* positional_encoding.py: script for computing random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) using graph data.
-* network_features.py: script for computing network features (degree, clustering coefficient, betweenness, PageRank, HITS).
+* compute_courls.py: Iterate over sorted list of integers representing unique URLs in 12M tweets. Uses Cython and multithreading. 
+* node2vec.py: Computes node2vec embeddings and writes to file.
+* positional_encoding.py: Computes random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) and writes to file.
+* network_features.py: Computes network features (degree, clustering coefficient, betweenness, PageRank, HITS) and writes to file.
 
 **batch.sh**
 Iterates train.py script over command line arguments written to file by gen_args.py.
