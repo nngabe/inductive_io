@@ -2,9 +2,18 @@ import itertools
 import sys
 
 
-# take the cartesian product of all opts and write 
-# arg strings to file for training:
-# e.g. python train.py --model MLP --dropout 0.6 --pe 01111 
+# compute the cartesian product of specified options and  
+# write an arg string to file. Arg strings are then iterated  
+# over by batch.sh.
+
+# e.g.
+# gen_args.py: writes args to file base.txt
+# option_strings = ['--model MLP --dropout 0.6 --pe 01111', '--model GCN --dropout 0.6 --pe 01111', ... ]
+
+# batch.sh: reads args from file base.txt and runs
+# python train.py --model MLP --dropout 0.6 --pe 01111
+# python train.py --model GCN --dropout 0.6 --pe 01111
+# python train.py ...
 
 print('options: gnn,base,var,all,test')
 batch = sys.argv[1]
