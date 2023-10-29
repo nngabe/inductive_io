@@ -23,7 +23,7 @@ Train and evaluate models with the following steps:
 **/utils**
 
 * utils.py: utility Functions for loading, saving, and plotting data.
-* twitter_api.py: Wrapper functions for making requests from the Twitter API by username or uid.
+* twitter_api.py: Wrapper functions for sending requests to the Twitter API by username or uid.
 
 **/graph_compute**
 
