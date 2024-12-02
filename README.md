@@ -4,6 +4,10 @@ Repository for _"Inductive detection of Influence Operations via Graph Learning"
 
 An overview of the framework can be found in the [figure](#figure) below. 
 
+## Figure
+<img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
+
+
 ## Contents:
 
 **train.py**  
@@ -31,8 +35,4 @@ Train and evaluate models with the following steps:
 * node2vec.py: Computes node2vec embeddings and writes to file.
 * positional_encoding.py: Computes random walk positional encoding (RWPE) and laplacian eigenvectors positional encoding (LE) and writes to file.
 * network_features.py: Computes network features (degree, clustering coefficient, betweenness, PageRank, HITS) and writes to file.
-
-## Figure
-<img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
-
 
