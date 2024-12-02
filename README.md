@@ -1,12 +1,8 @@
 # inductive_io
 
-Repository for _"Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
-
-An overview of the framework can be found in the [figure](#figure) below. 
-
-## Figure
 <img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
 
+Repository for _"Inductive detection of Influence Operations via Graph Learning"_ [[arXiv](https://arxiv.org/abs/2305.16544)]
 
 ## Contents:
 
