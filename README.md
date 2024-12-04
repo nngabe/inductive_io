@@ -1,5 +1,4 @@
 # inductive_io
-[IO_paper_flow.pdf](https://github.com/user-attachments/files/18013835/IO_paper_flow.pdf)
 
 <img width="953" alt="inductive_io" src="https://github.com/nngabe/inductive_io/assets/50005216/62a9e715-30f8-47da-98cc-f5e90f21ef85">
 
